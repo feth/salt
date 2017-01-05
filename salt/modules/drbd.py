@@ -20,6 +20,7 @@ def overview():
         salt '*' drbd.overview
     '''
     cmd = 'drbd-overview'
+    all_rets = []
     for line in __salt__['cmd.run'](cmd).splitlines():
         ret = {}
         fields = line.strip().split()
@@ -82,4 +83,5 @@ def overview():
                     'synchronisation: ': syncbar,
                     'synched': sync,
                 }
-    return ret
+        all_rets.append(ret)
+    return all_rets
